@@ -11,8 +11,9 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 # stop words
 def get_stopwords():
     stop_words = nltk.corpus.stopwords.words('english')
-    twitterwords = ["http", "rt", "golden", "goldenglobes", "globes"]
-    return stop_words + twitterwords
+    twitter_words = ["http", "rt"]
+    award_words = ["golden", "goldenglobes", "globes", "watching"]
+    return stop_words + twitter_words + award_words
 
 def remove_stopwords(words):
     processed_list = []
@@ -42,9 +43,12 @@ def tokenize_multiple_texts(listof_texts):
 
 def strip_punctuation(words):
     translate_table = dict((ord(char), None) for char in string.punctuation)
+    new_words = []
     for w in words:
-        w.translate(translate_table)
-    return words
+        new_word = w.translate(translate_table)
+        if new_word:
+            new_words.append(new_word)
+    return new_words
 
 
 # returns a dict containing frequency of words in list
@@ -58,16 +62,13 @@ def get_word_freq_dict(words):
     return words_sorted_by_freq
 
 # printing
-def print_dict_of_word_frequencies(dict):
+def print_dict(dict):
     date = datetime.datetime.now()
     file = open(dir_path + '/output/' + str(date) + ".txt", "w")
 
-    file.write("--------------\n")
-    file.write("Word Frequency\n")
-    file.write("--------------\n")
     d_view = [ (v,k) for k,v in dict.iteritems() ]
     d_view.sort(reverse=True) # natively sort tuples by first element
     for v,k in d_view:
-        file.write("%s: %d\n" % (k.encode('ascii', 'ignore'),v))
+        file.write("%s: %s\n" % (k.encode('ascii', 'ignore'),str(v)))
 
     file.close()

@@ -3,6 +3,7 @@ import json
 import nltk
 import re
 from nltk.corpus import stopwords
+
 stop = stopwords.words('english')
 namesdic={}
 
@@ -54,7 +55,7 @@ def extract_names(document):
                     	namesdic[temp]=1
     return names
 
-
+#Both json file has been tested and can successfully obtained the result
 j_file=open('gg2013.json')
 #j_file=open('gg2015.json')
 j_str=j_file.read()

@@ -55,56 +55,60 @@ def extract_names(document):
                     	namesdic[temp]=1
     return names
 
-#Both json file has been tested and can successfully obtained the result
-j_file=open('gg2013.json')
-#j_file=open('gg2015.json')
-j_str=j_file.read()
-j_data=json.loads(j_str)
-x=[]
-#tokens=nltk.word_tokenize(j_data[1]['text'])
-counter=0
-blacklist=['olden','lobes']
-#we can update the blacklist later
-for i in j_data:
-	if 'host' in i['text']:
-		try:
-			x+=extract_names(i['text'])
-			
-			counter+=1
-		except:
-			continue
-	if counter>2000:
-		break
-
-#select the top20 names(according how often they occur) 
-temp=sorted(namesdic.items(),key = lambda x:x[1],reverse = True)[0:20]
-
-
-#exclude the names which are in blacklist such as golden globes...blablabla
-result=[]
-for i in temp:
-	if not IsInblacklist(blacklist,i[0]):
-		result.append(i)
-
-
-#exlude the repeated ones and get our host result
-
-FinalResult=[]
-marker=0
-for i in result:
-	for j in result:
-		if IsRepeatedName(i[0],j[0]):
-			marker=1
+def test(path):
+	#Both json file has been tested and can successfully obtained the result
+	j_file=open(path)
+	#j_file=open('gg2015.json')
+	j_str=j_file.read()
+	j_data=json.loads(j_str)
+	x=[]
+	#tokens=nltk.word_tokenize(j_data[1]['text'])
+	counter=0
+	blacklist=['olden','lobes']
+	#we can update the blacklist later
+	for i in j_data:
+		if 'host' in i['text']:
+			try:
+				x+=extract_names(i['text'])
+				
+				counter+=1
+			except:
+				continue
+		if counter>2000:
 			break
-	if marker==1:
-		marker=0
-		continue
-	if IsLegalName(i[0]):
-		FinalResult.append(i[0])
+
+	#select the top20 names(according how often they occur) 
+	temp=sorted(namesdic.items(),key = lambda x:x[1],reverse = True)[0:20]
 
 
-print(FinalResult[0:2])
+	#exclude the names which are in blacklist such as golden globes...blablabla
+	result=[]
+	for i in temp:
+		if not IsInblacklist(blacklist,i[0]):
+			result.append(i)
 
+
+	#exlude the repeated ones and get our host result
+
+	FinalResult=[]
+	marker=0
+	for i in result:
+		for j in result:
+			if IsRepeatedName(i[0],j[0]):
+				marker=1
+				break
+		if marker==1:
+			marker=0
+			continue
+		if IsLegalName(i[0]):
+			FinalResult.append(i[0])
+
+
+	print(FinalResult[0:2])
+
+
+if __name__ == '__main__':
+	test('data/gg2013.json')
 
 
 

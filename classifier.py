@@ -72,16 +72,11 @@ gg2015_categories = [
 
 
 def award_classifier(tweet_tokens, award_categories, token_dict, bigram_dict, trigram_dict):
-    tweet_bigrams = list(bigrams(tweet_tokens))
-    tweet_trigrams = list(trigrams(tweet_tokens))
     best_score = 0
     best_category = ""
     for award in award_categories:
-        token_matches = num_matches(token_dict[award], tweet_tokens)
-        bigram_matches = num_matches(bigram_dict[award], tweet_bigrams)
-        trigram_matches = num_matches(trigram_dict[award], tweet_trigrams)
-        score = 2 * token_matches + 2 * bigram_matches + 2 * trigram_matches
-        if score > best_score and score > 15:
+        score = num_matches(token_dict[award], tweet_tokens)
+        if score > best_score and score > 2:
             best_score = score
             best_category = award
     return best_category
@@ -97,9 +92,12 @@ def num_matches(list1, list2):
 A script that classifies tweets into different award types
 '''
 
-db = TweetDatabase('./data/gg2013.json', 100000)
+db = TweetDatabase('./data/gg2013.json', 1000000)
 print("Extracting tweets...")
 tweets = db.get_tweets()
+stop_words = get_stopwords()
+replace_words = get_replacewords()
+important_words = get_importantwords()
 
 print("Parsing awards...")
 tweet_dict_by_award = {}
@@ -112,19 +110,24 @@ for award in gg2013_categories:
     award_token = strip_punctuation(award_token)
     award_bigram_dict[award] = list(bigrams(award_token))
     award_trigram_dict[award] = list(trigrams(award_token))
-    award_token = remove_stopwords(award_token)
+    award_token = remove_stopwords(award_token, stop_words, replace_words, important_words)
     award_token_dict[award] = award_token
 
 
 print("Classifying tweets...")
+counter = 0
 for tweet in tweets:
     tokens = twitter_tokenize(tweet)
     tokens = strip_punctuation(tokens)
-    # tokens = remove_stopwords(tokens)
+    tokens = remove_stopwords(tokens, stop_words, replace_words, [])
     category = award_classifier(tokens, gg2013_categories, award_token_dict, award_bigram_dict, award_trigram_dict)
     if category:
+        counter += 1
+        if (counter % 1000 is 0):
+            print(str(counter) + " tweets classified...")
         tweet_dict_by_award[category].append(tweet)
 
+print(str(counter) + " tweets were classified in total.")
 print("Printing results to file...")
 date = datetime.datetime.now()
 file = open(dir_path + '/output/' + str(date) + ".txt", "w")

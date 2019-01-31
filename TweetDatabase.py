@@ -15,7 +15,7 @@ class TweetDatabase:
             if counter > max_count:
                 break
             counter += 1
-        print('Database initialized with ' + str(max_count) + ' tweets.')
+        print('Database initialized with ' + str(len(self.tweets)) + ' tweets.')
 
 
     # returns total number of words in db

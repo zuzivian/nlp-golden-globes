@@ -3,6 +3,13 @@ import json
 import nltk
 import re
 from nltk.corpus import stopwords
+from classifier import *
+
+# Nat's code for classifiying tweets
+# Usage: tweet_dic['Best Screenplay - Motion Picture'] : returns a list of strings (unicode)
+
+tweet_dic = get_and_classify_tweets('./data/gg2013.json', 1000000, gg2013_categories)
+test=tweet_dic[]
 
 stop = stopwords.words('english')
 namesdic={}
@@ -17,14 +24,14 @@ namesdic={}
 # If the awards winner is a people’s name, usually two words(such as ‘ben afflick’ ‘anny hathway’),
 # it won’t work.
 
-# The way to solve this problem is to still get the single word, and then at the same time, 
+# The way to solve this problem is to still get the single word, and then at the same time,
 # I create a name list which saves all of the possible names.
-# And then use the single word to compare with those possible names, 
+# And then use the single word to compare with those possible names,
 #if the single word is a substring of one of the possible names, then take it. The result seems good by using this method.
 
 
 #And now it's very important to classify award into two types:
-#1.the award whose winner names are single word 
+#1.the award whose winner names are single word
 #2.the award whose winner names are two words(usually people's name)
 def ie_preprocess(document):
 	document = ' '.join([i for i in document.split() if i not in stop])
@@ -53,7 +60,7 @@ def IsInblacklist(blacklist,l):
 def IsLegalName(l1):
 	if len(l1.split())!=2:
 		return False
-	return True	
+	return True
 def RemovePunctuation(line):
 
 	s="!#$%&()*+,-./:;<=>?@[\]^_`{'~}"
@@ -83,7 +90,7 @@ def GetLatterWord(sen1,w1):
 
 def extract_names(document):
     names = []
-    
+
     sentences = ie_preprocess(document)
     for tagged_sentence in sentences:
         for chunk in nltk.ne_chunk(tagged_sentence):
@@ -118,7 +125,7 @@ blacklist=['olden','lobes']
 name_list={}
 result={}
 #xxx wins
-#xxx awards goes to 
+#xxx awards goes to
 #"awardname"-
 for i in j_data:
 	#print(i['text'].encode('ascii', 'ignore'))
@@ -165,7 +172,3 @@ print(result)
 # 	for j in namesdic.keys():
 # 		if i in j.lower():
 # 			print(j)
-
-
-
-

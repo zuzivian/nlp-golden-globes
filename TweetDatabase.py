@@ -4,7 +4,7 @@ import json
 
 class TweetDatabase:
     def __init__(self, db_path, max_count):
-        print('Initializaing database...')
+        print('Initializing database...')
         dir_path = os.path.dirname(os.path.realpath(__file__))
         with open(dir_path + '/' + db_path) as f:
             data = json.load(f)

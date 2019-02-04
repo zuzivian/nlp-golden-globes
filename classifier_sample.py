@@ -1,13 +1,10 @@
 from classifier import *
-from nltk import bigrams, trigrams
-from math import pow
-
-
 
 '''
 A sample script that classifies tweets into different award types
 '''
 
+# returns a dictionary containing tweets classified by award categories
 tweet_dict_by_award = get_and_classify_tweets('./data/gg2013.json', 1000000, gg2013_categories)
 
 print("Printing results to file...")

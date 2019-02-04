@@ -24,7 +24,6 @@ def num_matches(list1, list2):
 
 
 def get_and_classify_tweets(file_path, max_tweets, award_list):
-    print("Initializng database...")
     db = TweetDatabase(file_path, max_tweets)
     tweets = db.get_tweets()
     stop_words = get_stopwords()
@@ -40,11 +39,15 @@ def get_and_classify_tweets(file_path, max_tweets, award_list):
         award_token = remove_stopwords(award_token, stop_words, replace_words)
         award_token_dict[award] = award_token
     print("Classifying tweets...")
+    counter = 0
     for tweet in tweets:
         tokens = twitter_tokenize(tweet)
         tokens = strip_punctuation(tokens)
         tokens = remove_stopwords(tokens, stop_words, replace_words)
         category = award_classifier(tokens, gg2013_categories, award_token_dict)
         if category:
+            counter += 1
+            if (counter % 1000 is 0):
+                print(counter + " tweets classified...")
             tweet_dict_by_award[category].append(tweet)
     return tweet_dict_by_award

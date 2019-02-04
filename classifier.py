@@ -71,7 +71,7 @@ gg2015_categories = [
         ]
 
 
-def award_classifier(tweet_tokens, award_categories, token_dict, bigram_dict, trigram_dict):
+def award_classifier(tweet_tokens, award_categories, token_dict):
     best_score = 0
     best_category = ""
     for award in award_categories:
@@ -97,20 +97,15 @@ print("Extracting tweets...")
 tweets = db.get_tweets()
 stop_words = get_stopwords()
 replace_words = get_replacewords()
-important_words = get_importantwords()
 
 print("Parsing awards...")
 tweet_dict_by_award = {}
 award_token_dict = {}
-award_bigram_dict = {}
-award_trigram_dict = {}
 for award in gg2013_categories:
     tweet_dict_by_award[award] = []
     award_token = award.lower().split()
     award_token = strip_punctuation(award_token)
-    award_bigram_dict[award] = list(bigrams(award_token))
-    award_trigram_dict[award] = list(trigrams(award_token))
-    award_token = remove_stopwords(award_token, stop_words, replace_words, important_words)
+    award_token = remove_stopwords(award_token, stop_words, replace_words)
     award_token_dict[award] = award_token
 
 
@@ -119,8 +114,8 @@ counter = 0
 for tweet in tweets:
     tokens = twitter_tokenize(tweet)
     tokens = strip_punctuation(tokens)
-    tokens = remove_stopwords(tokens, stop_words, replace_words, [])
-    category = award_classifier(tokens, gg2013_categories, award_token_dict, award_bigram_dict, award_trigram_dict)
+    tokens = remove_stopwords(tokens, stop_words, replace_words)
+    category = award_classifier(tokens, gg2013_categories, award_token_dict)
     if category:
         counter += 1
         if (counter % 1000 is 0):

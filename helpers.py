@@ -12,8 +12,7 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 def get_stopwords():
     stop_words = nltk.corpus.stopwords.words('english')
     twitter_words = ["http", "rt"]
-    award_words = ["golden", "goldenglobes", "globes", "watching"]
-    return stop_words + twitter_words + award_words
+    return stop_words + twitter_words
 
 def get_replacewords():
     return {
@@ -21,18 +20,13 @@ def get_replacewords():
         'picture': 'movie'
     }
 
-def get_importantwords():
-    return ['actor', 'actress', 'performance', 'supporting']
-
-def remove_stopwords(words, stop_words, replace_words, important_words):
+def remove_stopwords(words, stop_words, replace_words):
     processed_list = []
     for w in words:
         if w not in stop_words:
             if w in replace_words.keys():
                 w = replace_words[w]
             processed_list.append(w)
-            if w in important_words:
-                processed_list.append(w)
     return processed_list
 
 

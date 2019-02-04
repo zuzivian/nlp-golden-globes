@@ -48,6 +48,6 @@ def get_and_classify_tweets(file_path, max_tweets, award_list):
         if category:
             counter += 1
             if (counter % 1000 is 0):
-                print(counter + " tweets classified...")
+                print(str(counter) + " tweets classified...")
             tweet_dict_by_award[category].append(tweet)
     return tweet_dict_by_award

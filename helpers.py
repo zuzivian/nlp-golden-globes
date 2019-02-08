@@ -16,16 +16,21 @@ def get_stopwords():
 
 def get_replacewords():
     return {
-        'television': 'tv',
-        'picture': 'movie'
+        u'television': u'tv',
+        u'picture': u'movie',
+        u'miniseries': u'limited',
+        u'mini-series': u'limited',
+        u'mini': u'limited',
+        u'limited': u'limited',
+        'limited': u'limited',
     }
 
 def remove_stopwords(words, stop_words, replace_words):
     processed_list = []
     for w in words:
-        if w not in stop_words:
+        if w not in stop_words and w not in processed_list:
             if w in replace_words.keys():
-                w = replace_words[w]
+                processed_list.append(replace_words[w])
             processed_list.append(w)
     return processed_list
 

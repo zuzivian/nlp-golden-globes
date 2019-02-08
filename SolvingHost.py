@@ -55,7 +55,7 @@ def extract_names(document):
                     	namesdic[temp]=1
     return names
 
-def test(path):
+def GetHost(path):
 	#Both json file has been tested and can successfully obtained the result
 	j_file=open(path)
 	#j_file=open('gg2015.json')
@@ -105,10 +105,10 @@ def test(path):
 
 
 	print(FinalResult[0:2])
-
+	return FinalResult[0:2]
 
 if __name__ == '__main__':
-	test('data/gg2013.json')
+	GetHost('data/gg2013.json')
 
 
 

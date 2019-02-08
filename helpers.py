@@ -18,11 +18,7 @@ def get_replacewords():
     return {
         u'television': u'tv',
         u'picture': u'movie',
-        u'miniseries': u'limited',
-        u'mini-series': u'limited',
-        u'mini': u'limited',
-        u'limited': u'limited',
-        'limited': u'limited',
+        'miniseries': 'limited',
     }
 
 def remove_stopwords(words, stop_words, replace_words):

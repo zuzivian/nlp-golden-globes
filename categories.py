@@ -1,5 +1,7 @@
 
 gg2013_categories = [
+        u"host hosts funny joke jokes opening speech monologue",
+        u"red carpet dress suit dressed looks",
         u"Best Motion Picture - Drama",
         u"Best Motion Picture - Musical or Comedy",
         u"Best Performance by an Actress in a Motion Picture - Drama",

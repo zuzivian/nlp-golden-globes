@@ -23,7 +23,8 @@ def num_matches(list1, list2):
     return matches
 
 # file_path: path to json database
-# max_tweets: maximum 
+# max_tweets: maximum number of tweets to process
+# award_list: list of string containing award name
 def get_and_classify_tweets(file_path, max_tweets, award_list):
     db = TweetDatabase(file_path, max_tweets)
     tweets = db.get_tweets()
@@ -46,9 +47,9 @@ def get_and_classify_tweets(file_path, max_tweets, award_list):
         tokens = strip_punctuation(tokens)
         tokens = remove_stopwords(tokens, stop_words, replace_words)
         category = award_classifier(tokens, gg2013_categories, award_token_dict)
+        counter += 1
+        if (counter % 10000 is 0):
+            print(str(counter) + " tweets classified...")
         if category:
-            counter += 1
-            if (counter % 1000 is 0):
-                print(str(counter) + " tweets classified...")
             tweet_dict_by_award[category].append(tweet)
     return tweet_dict_by_award

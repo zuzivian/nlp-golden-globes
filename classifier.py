@@ -10,7 +10,7 @@ def award_classifier(tweet_tokens, award_categories, token_dict):
     best_category = ""
     for award in award_categories:
         score = num_matches(token_dict[award], tweet_tokens)
-        if score > best_score and score > 2:
+        if score > best_score and score > 1:
             best_score = score
             best_category = award
     return best_category
@@ -22,7 +22,8 @@ def num_matches(list1, list2):
         matches += list2.count(item)
     return matches
 
-
+# file_path: path to json database
+# max_tweets: maximum 
 def get_and_classify_tweets(file_path, max_tweets, award_list):
     db = TweetDatabase(file_path, max_tweets)
     tweets = db.get_tweets()

@@ -8,8 +8,8 @@ from classifier import *
 # Nat's code for classifiying tweets
 # Usage: tweet_dic['Best Screenplay - Motion Picture'] : returns a list of strings (unicode)
 
-tweet_dic = get_and_classify_tweets('./data/gg2013.json', 1000000, gg2013_categories)
-test=tweet_dic[]
+#tweet_dic = get_and_classify_tweets('./data/gg2013.json', 1000000, gg2013_categories)
+# test=tweet_dic[]
 
 stop = stopwords.words('english')
 namesdic={}

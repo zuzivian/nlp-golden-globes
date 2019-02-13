@@ -1,0 +1,195 @@
+b'Werk': 0
+b'Awkward Savannah': 0
+b'Nominee': 0
+b'Denzel Washington': 0
+b'Jennifer Lopez': 0
+b'Anjelica Huston': 1
+b'Hello': 0
+b'Lea Michele': 0
+b'Heidi Klum': 0
+b'Marion Cotillard': 0
+b'Ricky Gervais': 0
+b'Jeremy': 0
+b'Renner': 0
+b'Jennifer Lawrence': 1
+b'Downton Abbey': 0
+b'Sarah Paulson': 0
+b'Kerry': 1
+b'Tune': 0
+b'Photos': 0
+b'Kate': 0
+b'Hudson': 0
+b'Eva Longoria': 0
+b'Leonardo': 0
+b'Hayden Panettiere': 0
+b'Roberto Cavalli': 0
+b'Jodie Foster': 1
+b'Red Carpet': 0
+b'Red Nude': 0
+b'Kate Hudson': 1
+b'Video': 0
+b'Rob': -1
+b'Amy Poehler': 0
+b'Marshall': 0
+b'Tina Fey': 0
+b'Kristen Wiig': 0
+b'Bradley Cooper': 0
+b'Live Red Carpet': 0
+b'Michelle Dockery': 0
+b'Helen Mirren': 0
+b'Megan Fox': 0
+b'Miranda': 0
+b'Orlando Bloom': 0
+b'Happy': 0
+b'Steve Odekerk': 0
+b'Idiot': 0
+b'Best': 0
+b'Jackman': 0
+b'Zooey Deschanel': 0
+b'Katharine': 0
+b'Love': 1
+b'Orlando': 0
+b'Sienna Red Carpet': 0
+b'Madame Butterfly': 0
+b'Burberry': 0
+b'Stacy Keibler George Clooney': 0
+b'Adele': 0
+b'Queen': 0
+b'Jessica Chastain': 0
+b'Impromptu': 0
+b'Clooney Margulies': 0
+b'Seacrest': 0
+b'Rojo': 0
+b'Sophia Vergara': 0
+b'Anne Hathaway': 0
+b'Golden Globes': 1
+b'Everyone': 0
+b'Oscars': 0
+b'Bollywood': 0
+b'Dress Elie Saab': 0
+b'Makeup': 0
+b'Live': 0
+b'Benedict': 0
+b'Julianne': 0
+b'Moore Tom Ford': 0
+b'Eva': 0
+b'Sofia': 0
+b'Holy Fuck': 0
+b'Al Roker Red Carpet': 0
+b'Sienna Miller': 0
+b'Car': 0
+b'Burbank': 0
+b'Golden': 2
+b'Pouhahha': 0
+b'Globes Red Carpet Coverage Time': 0
+b'Rolonda Watts': 0
+b'Dalia MacPhee': 0
+b'Halle Berry': 0
+b'Vergara': 0
+b'Jessica Rabbit': 0
+b'E Red Carpet': 0
+b'Taylor': 1
+b'Kelly': 0
+b'Kerry Washington': 0
+b'Carpet Look': 1
+b'Fox': 0
+b'Cranky': 0
+b'Pretty Dolce': 0
+b'Gabbana': 0
+b'Jessica Alba': 0
+b'Carpet': 1
+b'Globes': 0
+b'Leno': 0
+b'George': 0
+b'Clooney Julianna Margulies': 0
+b'Jeremy Renner': 0
+b'Golden Globes Red Carpet': 0
+b'Que': 0
+b'Megan Fox Brian Austin Green': 0
+b'Julianna': 0
+b'Margulies George Clooney': 0
+b'Ross Nurse Hathaway': 0
+b'E Online Red': 0
+b'Cuando': 0
+b'Jay Leno': 0
+b'Sick Red Carpet': 0
+b'Golden Globes Arrival Special': 0
+b'Annual Golden': 0
+b'Carpet Golden Globes': 0
+b'Out Megan Fox': 0
+b'Zooey Deschanel All Hottest Stars Red Carpet': 0
+b'Scene': 0
+b'Al Roker': 0
+b'Al': 0
+b'Ryan': 0
+b'Selena': 0
+b'Vanessa': 0
+b'Nene': 0
+b'Ryan Seacrest': 0
+b'Spunk Ransom Videos': 0
+b'Find': 0
+b'Sofia Vergara': 0
+b'Sofia Vergara Gloria': 0
+b'Lucy': 0
+b'Jessica': 0
+b'Chastain Tina Fey': 0
+b'Ann Curry': 0
+b'Jason': 0
+b'Anne': 0
+b'Zeller': 0
+b'Pats': 0
+b'Golden Globes Red Carpet Special': 0
+b'Carpet Photos': 0
+b'Gowns': 0
+b'Saw': 0
+b'Nude': 0
+b'Oscar': 0
+b'Jennifer': 0
+b'Walks Red Carpet Solo': 0
+b'Live Chat': 0
+b'Lisa Kudrow': 0
+b'Lovin': 0
+b'Live From Red Carpet': 2
+b'Lo': 0
+b'Amy Adams': 0
+b'Sally Fields': 0
+b'Megan Fox Claire Danes': 0
+b'Award': 0
+b'Amy': 0
+b'Jamie Kennedy': 0
+b'Caught': 0
+b'Gallery': 0
+b'Yahoo': 0
+b'Bill': 0
+b'Murray': 0
+b'Manages Look Amazing Golden Globes Red Carpet': 2
+b'Matt Lauer': 0
+b'Michelle Dockery Downton': 0
+b'Tina Amy': 0
+b'Bill Murray': 0
+b'Jennifer Lawrence Has Flu': 2
+b'Globes Red Carpet Live': 0
+b'Rosario': 0
+b'Dawson Taylor Swift': 0
+b'Nicole Kidman': 0
+b'Nicole': 0
+b'Kidman': 0
+b'Keith Urban': 0
+b'Claire Danes Jessica Chastain': 0
+b'Francesca Eastwood': 0
+b'Globes Red Carpet': 0
+b'Rob Red Carpet': 0
+b'Hathaway': 0
+b'Devil Wears Prada': 0
+b'Sienna': 0
+b'Miller Golden Globes': 0
+b'Ini': 0
+b'Gorgeous2': 0
+b'Chastain Golden Globes': 0
+b'Allison': 0
+b'Williams Golden Globes': 0
+b'Golden Globes Awards': 0
+b'Poehler Suits Up': 0
+b'Mmm': 0
+b'Anne Hathaway Stuns': 0
+b'Jealous Miranda': 0

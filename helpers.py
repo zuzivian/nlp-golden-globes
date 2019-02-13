@@ -21,7 +21,7 @@ def get_replacewords():
         'miniseries': 'limited',
     }
 
-def remove_stopwords(words, stop_words, replace_words):
+def remove_stopwords(words, stop_words, replace_words=[]):
     processed_list = []
     for w in words:
         if w not in stop_words and w not in processed_list:

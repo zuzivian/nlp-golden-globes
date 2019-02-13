@@ -1,8 +1,10 @@
 from helpers import *
 from categories import *
+from SolvingHost import *
+
 from TweetDatabase import TweetDatabase
 from nltk import bigrams, trigrams
-from math import pow
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 
 def award_classifier(tweet_tokens, award_categories, token_dict):
@@ -10,11 +12,10 @@ def award_classifier(tweet_tokens, award_categories, token_dict):
     best_category = ""
     for award in award_categories:
         score = num_matches(token_dict[award], tweet_tokens)
-        if score > best_score and score > 1:
+        if score > best_score and score > 0:
             best_score = score
             best_category = award
     return best_category
-
 
 def num_matches(list1, list2):
     matches = 0
@@ -22,10 +23,22 @@ def num_matches(list1, list2):
         matches += list2.count(item)
     return matches
 
+def analyze_sentiment_of_tweets(tweet_list):
+    sid = SentimentIntensityAnalyzer()
+    sentiments = {}
+    for tweet in tweet_list:
+        ss = sid.polarity_scores(tweet)
+        names = extract_names(tweet)
+        for name in names:
+            if name not in sentiments.keys():
+                sentiments[name] = 0
+            sentiments[name] += ss['compound']
+    return sentiments
+
 # file_path: path to json database
 # max_tweets: maximum number of tweets to process
 # award_list: list of string containing award name
-def get_and_classify_tweets(file_path, max_tweets, award_list):
+def get_and_classify_tweets(file_path, max_tweets, award_list, other_categories=[]):
     db = TweetDatabase(file_path, max_tweets)
     tweets = db.get_tweets()
     stop_words = get_stopwords()
@@ -34,6 +47,7 @@ def get_and_classify_tweets(file_path, max_tweets, award_list):
     print("Parsing awards...")
     tweet_dict_by_award = {}
     award_token_dict = {}
+    award_list.extend(other_categories)
     for award in award_list:
         tweet_dict_by_award[award] = []
         award_token = award.lower().split()

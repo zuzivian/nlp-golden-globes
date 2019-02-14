@@ -144,16 +144,17 @@ def SearchName(NameDic,segment):
 
 
 def generate_awards(year):
-	j_file=open('gg%s.json' % year)
-	j_str=j_file.read()
-	j_data=json.loads(j_str)
-	result={}
-	#tokens=nltk.word_tokenize(j_data[1]['text'])
-	blacklist=['olden','lobes']
-	name_list = {}
+	j_file = open('gg%s.json' % year)
+	j_str = j_file.read()
+	j_data = json.loads(j_str)
+	result = {}
+	# blacklist=['olden','lobes']
+	# name_list = {}
+	start_words = ['best']
+	end_words = ['picture','television','drama','comedy','musical', 'animated', 'language']
 
 	for i in j_data:
-		result = EndAndStart(result, i['text'],['best'],['picture','television','drama','comedy','musical', 'animated', 'language'])
+		result = EndAndStart(result, i['text'], start_words, end_words)
 
 	temp = sorted(result.items(), key=lambda x: x[1], reverse=True)
 	temp = sorted(temp, key=lambda x: len(x[0]), reverse=True)

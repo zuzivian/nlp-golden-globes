@@ -16,10 +16,23 @@ START HELPERS
 '''
 
 def get_classified_data(year):
-    with open('classified%d.json' % year) as json_data:
+    with open('classified%s.json' % year) as json_data:
         data = json.load(json_data)
     json_data.close()
     return data
+
+def get_redcarpet(year):
+    tweet_dict_by_award = get_classified_data(year)
+    red_carpet_tweets = tweet_dict_by_award['red carpet']
+    dict = analyze_sentiment_of_tweets(red_carpet_tweets)
+    ranked_list = sorted(dict.keys())
+    return {'best dressed': ranked_list[0], 'worst dressed': ranked_list[-1]}
+
+def get_jokes(year):
+    return {}
+
+def get_parties(year):
+    return {}
 
 '''
 END OF HELPERS
@@ -29,14 +42,15 @@ def get_hosts(year):
     '''Hosts is a list of one or more strings. Do NOT change the name
     of this function or what it returns.'''
     # Your code here
-    hosts = {}
+    hosts = []
     return hosts
 
 def get_awards(year):
     '''Awards is a list of strings. Do NOT change the name
     of this function or what it returns.'''
     # Your code here
-    return generate_awards(year)
+    awards = generate_awards(year)
+    return awards
 
 def get_nominees(year):
     '''Nominees is a dictionary with the hard coded award
@@ -79,7 +93,7 @@ def post_ceremony():
           continue
         try:
             award_list = OFFICIAL_AWARDS_1315 if year < 2016 else OFFICIAL_AWARDS_1819
-            classified_tweets = get_and_classify_tweets('gg%d.json' % year, MAX_TWEETS, award_list)
+            classified_tweets = get_and_classify_tweets('gg%d.json' % year, MAX_TWEETS, award_list, ['red carpet'])
             with open('classified%d.json' % year, 'w') as outfile:
                 json.dump(classified_tweets, outfile)
             print('Classifying gg%d tweets... done.' % year)
@@ -94,12 +108,11 @@ def main():
     run when grading. Do NOT change the name of this function or
     what it returns.'''
     # Your code here
-    post_ceremony()
 
     while True:
         print()
-        year = input("Select a year: ")
-        if int(year) not in YEARS:
+        year = int(input("Select a year: "))
+        if year not in YEARS:
             print("Error: invalid year")
             continue
         print('Valid functions: hosts awards nominees presenters redcarpet jokes parties')
@@ -123,9 +136,9 @@ def main():
             continue
 
         # process data and print out nicely
-        print("\n" + year + " " + choice + ": \n")
+        print("\n" + str(year) + " " + choice + ": \n")
         pprint(output)
 
 if __name__ == '__main__':
-    pre_ceremony()
+    post_ceremony()
     main()

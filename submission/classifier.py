@@ -1,4 +1,5 @@
 from helpers import *
+from dressed import *
 from TweetDatabase import TweetDatabase
 
 def award_classifier(tweet_tokens, award_categories, token_dict):

@@ -1,6 +1,5 @@
-from nltk import tokenize
 import nltk
-from nltk.tokenize import TweetTokenizer, RegexpTokenizer
+from nltk.tokenize import TweetTokenizer
 import datetime
 import string
 import os
@@ -16,12 +15,13 @@ def get_stopwords():
 
 def get_replacewords():
     return {
-        u'television': u'tv',
-        u'picture': u'movie',
+        'television': 'tv',
+        'picture': 'movie',
+        'mini-series': 'limited',
         'miniseries': 'limited',
     }
 
-def remove_stopwords(words, stop_words, replace_words=[]):
+def remove_stopwords(words, stop_words, replace_words={}):
     processed_list = []
     for w in words:
         if w not in stop_words and w not in processed_list:
@@ -58,6 +58,8 @@ def strip_punctuation(words):
     return new_words
 
 
+
+
 # returns a dict containing frequency of words in list
 def get_word_freq_dict(words):
     words_sorted_by_freq = {}
@@ -79,3 +81,96 @@ def print_dict(dict):
         file.write("%s: %s\n" % (k.encode('ascii', 'ignore'),str(v)))
 
     file.close()
+
+
+
+
+def ie_preprocess(document):
+	stop = get_stopwords()
+	document = ' '.join([i for i in document.split() if i not in stop])
+	sentences = nltk.sent_tokenize(document)
+	sentences = [nltk.word_tokenize(sent) for sent in sentences]
+	sentences = [nltk.pos_tag(sent) for sent in sentences]
+	return sentences
+
+
+def judge(document):
+	sentences = ie_preprocess(document)
+	for tagged_sentence in sentences:
+		sum=0
+		uses=[]
+		for chunk in nltk.ne_chunk(tagged_sentence):
+			if type(chunk) == nltk.tree.Tree:
+				if chunk.label() == 'PERSON':
+					temp=' '.join([c[0] for c in chunk[0:2]])
+
+					if len(temp.split())==2:
+						uses.append(temp)
+						sum+=1
+		if sum>3:
+			return True
+
+	return False
+
+
+def RemovePunctuation(line):
+	s="!#$%&()*+,-./:;<=>?@[\]^_`{'~}"
+	s+='"1234567890'
+	for x in s:
+		line=line.replace(x,'')
+	return line
+
+
+def GetFormerWord(sen1,w1):
+	word_list=nltk.word_tokenize(sen1)
+	for i in range(1,len(word_list)):
+		if word_list[i]==w1:
+			return RemovePunctuation(word_list[i-1]).lower()
+	return None
+
+
+def GetLatterWord(sen1,w1):
+	word_list=nltk.word_tokenize(sen1)
+	for i in range(0,len(word_list)-2):
+		if word_list[i].lower()==w1:
+			return RemovePunctuation(word_list[i+2]).lower()
+	return None
+
+
+def SearchName(NameDic,segment):
+	RealNames=[]
+	for j in NameDic.keys():
+		if segment in j.lower():
+			RealNames.append(j.lower())
+	return RealNames
+
+
+def extract_names(document):
+    names = []
+    namesdic = {}
+
+    sentences = ie_preprocess(document)
+    for tagged_sentence in sentences:
+        for chunk in nltk.ne_chunk(tagged_sentence):
+            if type(chunk) == nltk.tree.Tree:
+                if chunk.label() == 'PERSON':
+                    names.append(' '.join([c[0] for c in chunk]))
+                    temp=' '.join([c[0] for c in chunk[0:2]])
+                    #A little bit change, set length to 2 which shows in [0:2]
+                    if temp in namesdic:
+                    	namesdic[temp]+=1
+                    else:
+                    	namesdic[temp]=1
+    return names
+
+#we assume that only names with length 2 are legal.
+def IsLegalName(name):
+	return len(name.split()) == 2
+
+
+def IsRepeatedName(l1,l2):
+	a = l1.split()
+	b = l2.split()
+	if len(a) != 2 or len(b) != 2:
+        return False
+	return a[0] == b[1] and a[1] == b[0]

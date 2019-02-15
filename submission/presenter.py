@@ -12,10 +12,10 @@ from helpers import *
 def contains(a, b):
     a_set = set(a)
     b_set = set(b)
-    if len(a_set.intersection(b_set)) > 0: 
+    if len(a_set.intersection(b_set)) > 0:
         return True
     else:
-        return False   
+        return False
 
 def tweetTokenRmStop(tweetdata, stopwords):
     tweetlist = []
@@ -26,10 +26,10 @@ def tweetTokenRmStop(tweetdata, stopwords):
         words = word_tokenize(tweetdata[i])
         words_clean = [token for token in words if token.lower() not in stopwords and token.isalpha()]
         tweetlist.append(words_clean)
-        
-        i += 1 
-    return(tweetlist)   
-    
+
+        i += 1
+    return(tweetlist)
+
 def tweetTokenContain(tweetdata, keywords, stopwords):
     tweetnumber = []
     tweetlist = []
@@ -39,13 +39,13 @@ def tweetTokenContain(tweetdata, keywords, stopwords):
         tweettextToken = []
         words = word_tokenize(tweetdata[i])
         words_clean = [token for token in words if token.lower() not in stopwords and token.isalpha()]
-        
+
         if contains(words_clean, keywords) == True:
             tweetnumber.append(i)
             tweetlist.append(words_clean)
-        
+
         i += 1
-        
+
     return([tweetnumber, tweetlist])
 
 def tweetPrint(tweetdata, tweetnumber):
@@ -54,21 +54,21 @@ def tweetPrint(tweetdata, tweetnumber):
 def unigramsDict(tweetTokens):
 
     common_unigrams = {}
-    
+
     for sentence in tweetTokens:
         for ug in sentence:
             if ug in common_unigrams.keys():
                 common_unigrams[ug] += 1
             else:
                 common_unigrams[ug] = 1
-    
+
     d_view = [ (v,k) for k,v in common_unigrams.items() ]
     return d_view
 
 def bigramsDict(tweetTokens):
 
     common_bigrams = {}
-    
+
     for sentence in tweetTokens:
         bigrm_in_tweet = list(bigrams(sentence))
         for bg in bigrm_in_tweet:
@@ -76,21 +76,21 @@ def bigramsDict(tweetTokens):
                 common_bigrams[bg] += 1
             else:
                 common_bigrams[bg] = 1
-    
+
     d_view = [ (v,k) for k,v in common_bigrams.items() ]
     return d_view
 
 def printDictbyCount(dict_view, maximum = 200):
     dict_view.sort(reverse=True) # natively sort tuples by first element
     counter = 0
-    
+
     for v,k in dict_view:
         pprint("%s: %d" % (k,v))
         counter+=1
 
         if counter > maximum:
             break
-            
+
 def checkFullNameFormat(inputTupleN):
     word1 = inputTupleN[0]
     word2 = inputTupleN[1]
@@ -99,17 +99,17 @@ def checkFullNameFormat(inputTupleN):
             return True
     else:
         return False
-    
+
 def extractPseudoNames(input_dict, lowbound = 10):
 
     pseudo_namelist = []
-    
+
     for wordpair in input_dict:
         if wordpair[0] >= lowbound and checkFullNameFormat(wordpair[1]) == True:
             name_like = wordpair[1][0].lower() + " " + wordpair[1][1].lower()
             #name_like = wordpair[1][0] + " " + wordpair[1][1]
             pseudo_namelist.append(name_like)
-        
+
     return(pseudo_namelist)
 
 def namesValidate(tweetText, stopwords, threshold = 2):
@@ -121,7 +121,7 @@ def namesValidate(tweetText, stopwords, threshold = 2):
     nameslist = extractPseudoNames(common_bigrams_dict, threshold)
     #tct = tweet_present_tokenized[0]
     #tweet_present = tweetPrint(testdoc, tct)
-    
+
     return nameslist
 
 def tweetTextContain(tweetTextList, keywords):
@@ -129,13 +129,13 @@ def tweetTextContain(tweetTextList, keywords):
     i = 0
 
     for i in range(len(tweetTextList) - 1):
-        
+
         for keyword in keywords:
             if keyword in tweetTextList[i].lower():
                 tweetnumber = tweetnumber.union([i])
-        
+
         i += 1
-        
+
     return list(tweetnumber)
 
 def subjverb_tweets(tweetdata, names, keywordlist):
@@ -155,18 +155,18 @@ def subjverb_tweets(tweetdata, names, keywordlist):
                             immediateWords = [parttoken[0], parttoken[1]]
                         else:
                             immediateWords = [parttoken[0]]
-                        
+
                         if contains(immediateWords, keywordlist) == True:
                             nameslist.append(name)
                             sentenceB4 = tweetsplit[0]
                             additionalNamesParsing.append(sentenceB4)
         i += 1
-        
+
     for b4string in additionalNamesParsing:
         for name in names:
             if name in b4string:
                 nameslist.append(name)
-    
+
     #return nameslist
     return nameslist
 
@@ -177,16 +177,16 @@ def nameCountValidate(inputList):
     numCounts = len(inputList)
     numNames = len(names)
     names_del_list = []
-    
+
     # Odd occurence deletion
     for name in names:
         if freqDict[name] / numCounts < 1 / numNames * 0.9:
             #print(name + " deleted")
             names_del_list.append(name)
-    
+
     for name in names_del_list:
         del freqDict[name]
-        
+
     return freqDict
 
 def nameAccuValidate(freqDict):
@@ -199,7 +199,7 @@ def nameAccuValidate(freqDict):
             realname = name2[0] + " " + name2[1] + " " + name1[1]
             return [realname]
         elif name1[0] != name2[1] and name1[1] == name2[0]:
-            realname = name1[0] + " " + name1[1] + " " + name2[1]  
+            realname = name1[0] + " " + name1[1] + " " + name2[1]
             return [realname]
         elif names[0] in names[1]:
             return [names[1]]
@@ -207,7 +207,7 @@ def nameAccuValidate(freqDict):
             return [names[0]]
         else:
             return names
-    
+
     # Case 2: Three presenters due to wrong names
     elif len(names) > 2:
         print(names[2] + " deleted")
@@ -217,12 +217,12 @@ def nameAccuValidate(freqDict):
 
 
 def getPresenters(year):
-	'Load Data'
+	#'Load Data'
     tweet_dic = get_classified_data(year)
     awardcat = tweet_dic.keys()
     presenter_dict = {}
 
-    'Stopword and keyword manipulation'
+    #Stopword and keyword manipulation'
     stopWords = set(stopwords.words('english'))
     twitterwords = {"http", "rt", "goldenglobes", "golden", "globes", "golden", "globes", "globe"}
     stopWords = stopWords.union(twitterwords)
@@ -231,22 +231,22 @@ def getPresenters(year):
     for k in new_stopWords:
         award_stopwords = set(award_stopwords).union(set(k))
     new_stopWords = [i.lower() for i in award_stopwords]
-    
+
     stopWords = stopWords.union(new_stopWords)
-    keyword = ['present', 'presenting', 'presented', 'presents', 'presenter', 'presenters', 
+    keyword = ['present', 'presenting', 'presented', 'presents', 'presenter', 'presenters',
                'introduce', 'introducing', 'introduces', 'introduced',
                'announce', 'announcing', 'announces', 'announces']
 
 	#alltweets = [data[i]['text'] for i in range(len(data))]
     #all_pseudo_namelist = namesValidate(alltweets, stopWords, threshold = 50)
-    
+
     for award in awardcat:
         #print()
         #print(award + ":")
         testdoc = tweet_dic[award]
         #pseudo_namelist = all_pseudo_namelist
         pseudo_namelist = namesValidate(testdoc, stopWords, threshold = 1)
-        
+
         tweetSeq = tweetTextContain(testdoc, keyword)
         category_tweet = [testdoc[i] for i in tweetSeq]
         tweetInfo = subjverb_tweets(category_tweet, pseudo_namelist, keyword)

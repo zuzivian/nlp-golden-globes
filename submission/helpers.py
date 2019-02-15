@@ -3,6 +3,7 @@ from nltk.tokenize import TweetTokenizer
 import datetime
 import string
 import os
+import json
 
 # define globals
 dir_path = os.path.dirname(os.path.realpath(__file__))

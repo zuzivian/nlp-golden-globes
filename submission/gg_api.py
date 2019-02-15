@@ -3,6 +3,7 @@ import os
 from pprint import pprint
 
 from awards import *
+from dressed import *
 from classifier import *
 from OptimizedWin import *
 from SolvingHost import *
@@ -45,7 +46,7 @@ def get_hosts(year):
     '''Hosts is a list of one or more strings. Do NOT change the name
     of this function or what it returns.'''
     # Your code here
-    hosts=GetHost('gg%d.json' % year)
+    hosts=GetHost('gg%s.json' % year)
     return hosts
 
 def get_awards(year):

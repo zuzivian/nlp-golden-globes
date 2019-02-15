@@ -8,7 +8,7 @@ from nltk import word_tokenize
 from nltk.util import ngrams
 from collections import Counter
 
-tweet_dic = get_and_classify_tweets('./data/gg2015.json', 3000000, gg2013_categories)
+
 stop = stopwords.words('english')
 
 
@@ -61,7 +61,7 @@ def extract_names(document,namesdic):
 
 
 
-def GetWinner(awardType,final):
+def GetWinner(tweet_dic,awardType,final):
 
 	namesdic={}
 	text = tweet_dic[awardType]

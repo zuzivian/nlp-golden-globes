@@ -156,5 +156,3 @@ def FilterCounter(black,C):
 # 		print(i, ':',GetWinner(i))
 # 		print('\n')
 # 	#GetWinner("Best Television Series - Musical or Comedy")
-
-

@@ -18,8 +18,7 @@ def analyze_sentiment_of_tweets(tweet_list):
             if word[0] in stopwords or word[1] in stopwords:
                     continue
             if name not in sentiments.keys():
-                sentiments[name] = 0
-            if name == 'quentin tarantino':
-                print(tweet)
-            sentiments[name] += ss['compound']
+                sentiments[name] = (ss['compound'], 1)
+            else:
+                sentiments[name] = (sentiments[name][0]+ss['compound'], sentiments[name][1]+1)
     return sentiments

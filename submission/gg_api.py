@@ -28,7 +28,10 @@ def get_redcarpet(year):
     tweet_dict_by_award = get_classified_data(year)
     red_carpet_tweets = tweet_dict_by_award['red carpet']
     dict = analyze_sentiment_of_tweets(red_carpet_tweets)
-    ranked_tuple = sorted(dict.items(), key=lambda kv: kv[1])
+    newdict = {}
+    for key, value in dict.items():
+        newdict[key] = dict[key][0] / dict[key][1]
+    ranked_tuple = sorted(newdict.items(), key=lambda kv: kv[1])
     print(ranked_tuple)
     return {'best dressed': ranked_tuple[-1][0], 'worst dressed': ranked_tuple[0][0]}
 
@@ -125,7 +128,7 @@ def main():
         if year not in YEARS:
             print("Error: invalid year")
             continue
-        print('Valid functions: hosts awards nominees presenters redcarpet jokes parties')
+        print('Valid functions: hosts awards winner nominees presenters redcarpet jokes parties')
         choice = input("Select function: ")
         if choice == 'hosts':
             output = get_hosts(year)

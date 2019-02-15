@@ -7,7 +7,7 @@ def award_classifier(tweet_tokens, award_categories, token_dict):
     best_category = ""
     for award in award_categories:
         score = num_matches(token_dict[award], tweet_tokens)
-        if score > best_score and score > 0:
+        if score > best_score and score > 1:
             best_score = score
             best_category = award
     return best_category

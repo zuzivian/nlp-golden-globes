@@ -133,6 +133,8 @@ def main():
             output = get_awards(year)
         elif choice == 'nominees':
             output = get_nominees(year)
+        elif choice == 'winner':
+            output = get_winner(year)
         elif choice == 'presenters':
             output = get_presenters(year)
         elif choice == 'redcarpet':

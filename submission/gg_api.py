@@ -25,8 +25,9 @@ def get_redcarpet(year):
     tweet_dict_by_award = get_classified_data(year)
     red_carpet_tweets = tweet_dict_by_award['red carpet']
     dict = analyze_sentiment_of_tweets(red_carpet_tweets)
-    ranked_list = sorted(dict.keys())
-    return {'best dressed': ranked_list[0], 'worst dressed': ranked_list[-1]}
+    ranked_tuple = sorted(dict.items(), key=lambda kv: kv[1])
+    print(ranked_tuple)
+    return {'best dressed': ranked_tuple[-1][0], 'worst dressed': ranked_tuple[0][0]}
 
 def get_jokes(year):
     return {}

@@ -11,7 +11,8 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 def get_stopwords():
     stop_words = nltk.corpus.stopwords.words('english')
     twitter_words = ["http", "rt"]
-    return stop_words + twitter_words
+    gg_words = ['golden', 'globes', 'globe']
+    return stop_words + twitter_words + gg_words
 
 def get_replacewords():
     return {
@@ -167,10 +168,10 @@ def extract_names(document):
 def IsLegalName(name):
 	return len(name.split()) == 2
 
-
+# "Fey, Tina" and "Tina Fey" are the same person
 def IsRepeatedName(l1,l2):
-	a = l1.split()
-	b = l2.split()
-	if len(a) != 2 or len(b) != 2:
+    a = l1.split()
+    b = l2.split()
+    if ((len(a) != 2) or (len(b) != 2)):
         return False
-	return a[0] == b[1] and a[1] == b[0]
+    return (a[0] == b[1] and a[1] == b[0])

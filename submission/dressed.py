@@ -1,5 +1,6 @@
 from helpers import *
 
+from nltk import pos_tag
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 def analyze_sentiment_of_tweets(tweet_list):
@@ -16,7 +17,10 @@ def analyze_sentiment_of_tweets(tweet_list):
                 continue
             word = name.split(" ")
             if word[0] in stopwords or word[1] in stopwords:
-                    continue
+                continue
+            tags = pos_tag(word)
+            if tags[0][1] != 'NN' or tags[1][1] != 'NN':
+                continue
             if name not in sentiments.keys():
                 sentiments[name] = (ss['compound'], 1)
             else:

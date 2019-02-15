@@ -124,8 +124,8 @@ def main():
 
     while True:
         print()
-        year = int(input("Select a year: "))
-        if year not in YEARS:
+        year = input("Select a year: ")
+        if int(year) not in YEARS:
             print("Error: invalid year")
             continue
         print('Valid functions: hosts awards winner nominees presenters redcarpet jokes parties')

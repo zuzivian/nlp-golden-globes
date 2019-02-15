@@ -174,4 +174,10 @@ def IsRepeatedName(l1,l2):
     b = l2.split()
     if ((len(a) != 2) or (len(b) != 2)):
         return False
-    return (a[0] == b[1] and a[1] == b[0])
+    return a[0] == b[1] and a[1] == b[0]
+
+def get_classified_data(year):
+    with open('classified%s.json' % year) as json_data:
+        data = json.load(json_data)
+    json_data.close()
+    return data

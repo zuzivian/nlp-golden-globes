@@ -89,7 +89,7 @@ def GetHost(path):
 
 
 	#exlude the repeated ones and get our host result
-
+	record=[]
 	FinalResult=[]
 	marker=0
 	for i in result:
@@ -102,13 +102,18 @@ def GetHost(path):
 			continue
 		if IsLegalName(i[0]):
 			FinalResult.append(i[0])
+			record.append(i[1])
+			
+	if len(FinalResult)>1:
+		if record[0]-record[1]>200:
+			return FinalResult[0:1]
+
 
 
 	print(FinalResult[0:2])
 	return FinalResult[0:2]
 
-if __name__ == '__main__':
-	GetHost('data/gg2013.json')
+
 
 
 

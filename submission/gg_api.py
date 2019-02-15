@@ -61,12 +61,18 @@ def get_nominees(year):
     return nominees
 
 def get_winner(year):
-    '''Winners is a dictionary with the hard coded award
-    names as keys, and each entry containing a single string.
-    Do NOT change the name of this function or what it returns.'''
-    # Your code here
-    winners = {}
-    return winners
+    dic=get_classified_data(year)
+
+    winner= {}
+    if year=='2013'or year=='2015':
+        for i in OFFICIAL_AWARDS_1315:
+            GetWinner(dic,i,winner)
+
+    else:
+        for i in OFFICIAL_AWARDS_1819:
+            GetWinner(dic,i,winner)
+
+    return winner
 
 def get_presenters(year):
     '''Presenters is a dictionary with the hard coded award

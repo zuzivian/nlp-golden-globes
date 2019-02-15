@@ -4,7 +4,9 @@ from pprint import pprint
 
 from awards import *
 from classifier import *
-
+from OptimizedWin import *
+from SolvingHost import *
+from presenter import *
 MAX_TWEETS = 10000000
 YEARS = [2013, 2015, 2018, 2019]
 
@@ -79,7 +81,7 @@ def get_presenters(year):
     names as keys, and each entry a list of strings. Do NOT change the
     name of this function or what it returns.'''
     # Your code here
-    presenters = {}
+    presenters = getPresenters(year)
     return presenters
 
 def pre_ceremony():

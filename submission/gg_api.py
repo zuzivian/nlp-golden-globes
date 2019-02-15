@@ -42,7 +42,7 @@ def get_hosts(year):
     '''Hosts is a list of one or more strings. Do NOT change the name
     of this function or what it returns.'''
     # Your code here
-    hosts = []
+    hosts=GetHost('gg%d.json' % year)
     return hosts
 
 def get_awards(year):

@@ -50,6 +50,3 @@ def sentiAnalyzer(keyword,file):
 		return 'negative'
 	else:
 		return 'positive'
-
-
-print(sentiAnalyzer(['win'],'gg2013.json'))

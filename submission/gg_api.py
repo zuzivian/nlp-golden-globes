@@ -30,7 +30,8 @@ def get_classified_data(year):
 def get_redcarpet(year):
     tweet_dict_by_award = get_classified_data(year)
     red_carpet_tweets = tweet_dict_by_award['red carpet']
-    dict = analyze_sentiment_of_tweets(red_carpet_tweets)
+    sampled_tweets = sample_tweets(red_carpet_tweets, 2167)
+    dict = analyze_sentiment_of_tweets(sampled_tweets)
     newdict = {}
     for key, value in dict.items():
         newdict[key] = dict[key][0] / dict[key][1]

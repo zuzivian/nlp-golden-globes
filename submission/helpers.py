@@ -13,7 +13,7 @@ stop_words = nltk.corpus.stopwords.words('english')
 def get_stopwords():
     stop_words = nltk.corpus.stopwords.words('english')
     twitter_words = ["http", "rt"]
-    gg_words = ['golden', 'globes', 'globe']
+    gg_words = ['golden', 'globes', 'globe', 'twitter', 'party', 'hollywood', 'huffington', 'island', 'abbey']
     return stop_words + twitter_words + gg_words
 
 def get_replacewords():
@@ -33,6 +33,17 @@ def remove_stopwords(words, stop_words, replace_words={}):
             processed_list.append(w)
     return processed_list
 
+
+def sample_tweets(red_carpet_tweets, sample_size):
+    length = len(red_carpet_tweets)
+    sample_rate = length // sample_size if (length > sample_size) else 1
+    sampled_tweets = []
+    counter = 0
+    for tweet in red_carpet_tweets:
+        if counter % sample_rate == 0:
+            sampled_tweets.append(tweet)
+        counter += 1
+    return sampled_tweets
 
 def content_fraction(words):
     stop_words = get_stopwords()

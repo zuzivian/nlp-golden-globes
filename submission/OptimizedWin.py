@@ -120,8 +120,8 @@ def GetWinner(tweet_dic,awardType,final):
 	else:
 		for i in text:
 			str1 += RemovePunctuation(i)
-		black = awardType.lower().split() + stop + ['musical', 'feature', 'film', 'goldenglobes', 'common', 'tv',
-													'miniseries', 'a', 'movie']
+		black = awardType.lower().split()  + ['the','musical', 'feature', 'film', 'goldenglobes', 'common', 'tv',
+													'miniseries', 'a', 'movie','golden','globes']
 		token = nltk.word_tokenize(str1)
 		unigram = ngrams(token, 1)
 		bigrams = ngrams(token, 2)
@@ -136,6 +136,8 @@ def GetWinner(tweet_dic,awardType,final):
 def FilterCounter(black,C):
 	marker=0
 	for i in C.most_common(20):
+		if len(i[0])==1 and len(i[0][0])<=3:
+			continue
 		marker=0
 		#print(i)
 		for j in i[0]:

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
+
 
 import pandas as pd
 import re
@@ -93,10 +93,5 @@ def main(year):
 
 def stringMatch(a,b):
     if len(a) > len(b):
-        if b in a:
-            return True
-        return False
-    if a in b:
-        return True
-    return False
-
+        return b in a
+    return a in b

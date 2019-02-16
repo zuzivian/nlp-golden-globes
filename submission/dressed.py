@@ -8,6 +8,13 @@ def analyze_sentiment_of_tweets(tweet_list):
     sentiments = {}
     stopwords = get_stopwords() + ['red', 'carpet']
     for tweet in tweet_list:
+        words = ['dress', 'look', 'wear', '']
+        keyword = False
+        for word in words:
+            if word in tweet:
+                keyword = True
+        if not keyword:
+            continue
         ss = sid.polarity_scores(tweet)
         names = extract_names(tweet)
         for name in names:

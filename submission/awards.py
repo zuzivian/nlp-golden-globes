@@ -1,13 +1,19 @@
 # -*- coding: utf-8 -*-
 import json
 import re
+import pandas as pd
+import nltk
+from nltk.tokenize import RegexpTokenizer
+import difflib
 
 from helpers import *
 
 
 def extract_award_names(result, tweet, startlist, endlist):
 
+	tweet = tweet.replace('tv', 'television')
 	tweet_words = tweet.lower().split()
+
 
 	for i in startlist:
 		for j in endlist:
@@ -18,7 +24,7 @@ def extract_award_names(result, tweet, startlist, endlist):
 			if index_i > index_j:
 				continue
 			award_tokens = tweet_words[index_i:index_j+1]
-			if len(award_tokens) >= 3 and len(award_tokens) < 15:
+			if len(award_tokens) > 3 and len(award_tokens) < 13:
 				award = " ".join(award_tokens)
 				if award not in result:
 					result[award] = 1
@@ -30,7 +36,8 @@ def extract_award_names(result, tweet, startlist, endlist):
 def generate_awards(year):
 	result = {}
 	start_words = ['best']
-	end_words = ['picture', 'film', 'drama', 'comedy', 'musical', 'animated', 'miniseries', 'mini-series', 'score', 'song']
+	end_words = ['picture', 'television', 'drama', 'film', 'musical', 'score', 'song']
+	#end_words = ['picture', 'film', 'drama', 'comedy', 'musical', 'animated', 'miniseries', 'mini-series', ]
 	stop_words = get_stopwords()
 	replace_words = get_replacewords()
 
@@ -46,7 +53,7 @@ def generate_awards(year):
 	award_tuples = []
 
 	for item in temp:
-		if item[1] < 50:
+		if item[1] < 40:
 			continue
 		award_tuples.append(item)
 
@@ -60,13 +67,13 @@ def generate_awards(year):
 			tokens_j = twitter_tokenize(j)
 			tokens_j = remove_stopwords(tokens_j, stop_words, replace_words)
 			tokens_j = strip_punctuation(tokens_j)
-			if j.find(i[0]) != -1 or set(tokens_i) == set(tokens_j) or  " ".join(tokens_j) in " ".join(tokens_i):
+			if i[0] in j:
 				contained = True
 			differences = set(tokens_i).difference(tokens_j)
-			if len(differences) <= 1 and 'actress' not in differences:
+			if len(differences) <= 1 and 'actor' not in differences:
 				contained = True
 		if not contained:
 			awards.append(i[0])
 			print(i[0])
 
-	return awards
+	return awards[0:30]

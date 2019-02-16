@@ -73,7 +73,7 @@ def getNominee(award,winner,j_data,winnerlist):
             return []
         #print(Final.keys())
         else:
-            res=getMovieNom(winner)
+            res=getMovieNom(winner,j_data)
             return res
 
 def FilterCounter(black,C):
@@ -89,7 +89,7 @@ def FilterCounter(black,C):
     return res
 
 
-def getMovieNom(winner,file):
+def getMovieNom(winner,j_data):
         f=open('MovieDatabase.txt',encoding='utf-16')
         moviedic={}
         for i in f.read().split('\n'):
@@ -101,10 +101,7 @@ def getMovieNom(winner,file):
                 continue
         f.close()
 
-        j_file=open(file)
 
-        j_str=j_file.read()
-        j_data=json.loads(j_str)
         sum=0
         movies = {}
         movies[winner]=1
@@ -129,7 +126,6 @@ def getMovieNom(winner,file):
             if sum>10:
                 break
 
-        j_file.close()
         a=list(movies.keys())[0:6]
         if winner in a:
             a.remove(winner)

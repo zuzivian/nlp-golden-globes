@@ -7,6 +7,7 @@ import json
 
 # define globals
 dir_path = os.path.dirname(os.path.realpath(__file__))
+stop_words = nltk.corpus.stopwords.words('english')
 
 # stop words
 def get_stopwords():
@@ -88,7 +89,7 @@ def print_dict(dict):
 
 
 def ie_preprocess(document):
-	stop = get_stopwords()
+	stop = stop_words
 	document = ' '.join([i for i in document.split() if i not in stop])
 	sentences = nltk.sent_tokenize(document)
 	sentences = [nltk.word_tokenize(sent) for sent in sentences]

@@ -152,6 +152,8 @@ def main():
             output = get_redcarpet(year)
         elif choice == 'jokes':
             output = get_jokes(year)
+        elif choice=='sentiments':
+            output=get_sentiments(year)
         elif choice == 'parties':
             output = get_parties(year)
         else:

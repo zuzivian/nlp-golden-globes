@@ -44,11 +44,14 @@ def get_parties(year):
     return {}
 
 def get_sentiments(year):
-
+    resdic={}
     res=sentiAnalyzer(['host'],'gg%s.json' % year)
+    resdic['host']=res
     print('the most common sentiments toward hosts is',res)
     res1=sentiAnalyzer(['win'],'gg%s.json' % year)
+    resdic['winners']=res1
     print('the most common sentiments toward winners is',res1)
+    return resdic
 
 '''
 END OF HELPERS

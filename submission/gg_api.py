@@ -9,6 +9,7 @@ from OptimizedWin import *
 from SolvingHost import *
 from presenter import *
 from sentiment import *
+from nominee import *
 MAX_TWEETS = 10000000
 YEARS = [2013, 2015, 2018, 2019]
 
@@ -72,7 +73,15 @@ def get_nominees(year):
     names as keys, and each entry a list of strings. Do NOT change
     the name of this function or what it returns.'''
     # Your code here
-    nominees = {}
+    if os.path.exists('winner'+year+'.json'):
+        with open ('winner'+year+'.json') as json_data:
+            winnerdic=json.load(json_data)
+    else:
+        winnerdic=get_winner(year)
+    if year=='2013' or year=='2015':
+        nominees=Nominee('gg%s.json' % year,OFFICIAL_AWARDS_1315,winnerdic)
+    else:
+        nominees=Nominee('gg%s.json' % year,OFFICIAL_AWARDS_1819,winnerdic)
     return nominees
 
 def get_winner(year):
@@ -87,6 +96,10 @@ def get_winner(year):
         for i in OFFICIAL_AWARDS_1819:
             GetWinner(dic,i,winner)
 
+    print(winner)
+    if not os.path.exists('winner'+year+'.json'):
+        with open('winner'+year+'.json','w')as outfile:
+            json.dump(winner,outfile)
     return winner
 
 def get_presenters(year):

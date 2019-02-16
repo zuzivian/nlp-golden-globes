@@ -149,7 +149,7 @@ def main():
         if int(year) not in YEARS:
             print("Error: invalid year")
             continue
-        print('Valid functions: hosts awards winner nominees presenters redcarpet jokes parties')
+        print('Valid functions: hosts awards winner nominees presenters redcarpet jokes parties sentiments')
         choice = input("Select function: ")
         if choice == 'hosts':
             output = get_hosts(year)

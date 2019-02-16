@@ -135,11 +135,13 @@ def GetWinner(tweet_dic,awardType,final):
 # return None
 def FilterCounter(black,C):
 	marker=0
+	index=0
+	res=[]
 	for i in C.most_common(20):
+		index+=1
 		if len(i[0])==1 and len(i[0][0])<=3:
 			continue
 		marker=0
-		#print(i)
 		for j in i[0]:
 			#print(j)
 			if j.lower() in black:
@@ -147,9 +149,15 @@ def FilterCounter(black,C):
 				break
 		if marker==1:
 			continue
-		return ' '.join(k for k in i[0]).lower()
-	return None
-
+		res=i[0]
+		break
+	if len(res)==2:
+		return ' '.join(k for k in res).lower()
+	else:
+		for j in C.most_common(20)[index:index+5]:
+			if res[0] in j[0]:
+				return ' '.join(k for k in j[0]).lower()
+		return ' '.join(k for k in res).lower()
 
 # if __name__ == '__main__':
 # 	#print(GetWinner(u"Best Original Song - Motion Picture"))

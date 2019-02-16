@@ -10,6 +10,7 @@ from SolvingHost import *
 from presenter import *
 from sentiment import *
 from nominee import *
+from awardNew import *
 MAX_TWEETS = 10000000
 YEARS = [2013, 2015, 2018, 2019]
 
@@ -68,7 +69,8 @@ def get_awards(year):
     '''Awards is a list of strings. Do NOT change the name
     of this function or what it returns.'''
     # Your code here
-    awards = generate_awards(year)
+    #awards = generate_awards(year)
+    awards=getawards(year)
     return awards
 
 def get_nominees(year):

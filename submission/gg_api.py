@@ -8,6 +8,7 @@ from classifier import *
 from OptimizedWin import *
 from SolvingHost import *
 from presenter import *
+from sentiment import *
 MAX_TWEETS = 10000000
 YEARS = [2013, 2015, 2018, 2019]
 
@@ -40,6 +41,13 @@ def get_jokes(year):
 
 def get_parties(year):
     return {}
+
+def get_sentiments(year):
+
+    res=sentiAnalyzer(['host'],'gg%s.json' % year)
+    print('the most common sentiments toward hosts is',res)
+    res1=sentiAnalyzer(['win'],'gg%s.json' % year)
+    print('the most common sentiments toward winners is',res1)
 
 '''
 END OF HELPERS

@@ -91,22 +91,30 @@ def get_nominees(year):
     return nominees
 
 def get_winner(year):
-    dic=get_classified_data(year)
-
-    winner= {}
-    if year=='2013'or year=='2015':
-        for i in OFFICIAL_AWARDS_1315:
-            GetWinner(dic,i,winner)
-
+    #if run nominees first, it will run get_winner first.So a result of winner has been generated.
+    if os.path.exists('winner'+year+'.json'):
+        with open('winner'+year+'.json')as json_data:
+            winner=json.load(json_data)
+        return winner
+    
+    #if run winner first:
     else:
-        for i in OFFICIAL_AWARDS_1819:
-            GetWinner(dic,i,winner)
+        dic=get_classified_data(year)
 
-    print(winner)
-    if not os.path.exists('winner'+year+'.json'):
-        with open('winner'+year+'.json','w')as outfile:
-            json.dump(winner,outfile)
-    return winner
+        winner= {}
+        if year=='2013'or year=='2015':
+            for i in OFFICIAL_AWARDS_1315:
+                GetWinner(dic,i,winner)
+
+        else:
+            for i in OFFICIAL_AWARDS_1819:
+                GetWinner(dic,i,winner)
+
+        print(winner)
+        if not os.path.exists('winner'+year+'.json'):
+            with open('winner'+year+'.json','w')as outfile:
+                json.dump(winner,outfile)
+        return winner
 
 def get_presenters(year):
     '''Presenters is a dictionary with the hard coded award

@@ -105,7 +105,7 @@ def GetHost(path):
 			record.append(i[1])
 			
 	if len(FinalResult)>1:
-		if record[0]-record[1]>200:
+		if record[0]-record[1]>100:
 			return FinalResult[0:1]
 
 

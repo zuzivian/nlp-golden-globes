@@ -11,6 +11,7 @@ from presenter import *
 from sentiment import *
 from nominee import *
 from awardNew import *
+from joke import *
 MAX_TWEETS = 10000000
 YEARS = [2013, 2015, 2018, 2019]
 
@@ -40,6 +41,7 @@ def get_redcarpet(year):
     return {'best dressed': ranked_tuple[-1][0], 'worst dressed': ranked_tuple[0][0]}
 
 def get_jokes(year):
+    GetJoker('gg'+year+'.json')
     return {}
 
 def get_parties(year):

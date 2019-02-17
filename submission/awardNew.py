@@ -32,8 +32,10 @@ def EndAndStart(tweet,startlist,endlist):
 							else:
 								result[key1]+=1
 
+								
+								
+
 def getawards(year):
-	#Both json file has been tested and can successfully obtained the result
 	j_file=open('gg%s.json' % year)
 	j_str=j_file.read()
 	j_data=json.loads(j_str)
@@ -41,10 +43,19 @@ def getawards(year):
 	for i in j_data:
 		EndAndStart(i['text'],['best'],['picture','tv','drama','musical','animated'])
 
-	temp = sorted(result.items(), key=lambda x: x[1], reverse=True)[0:26]
+	temp = sorted(result.items(), key=lambda x: x[1], reverse=True)[0:28]
 	res=[]
 	for i in temp:
-		#if i[0].split()[-1] == 'picture' or i[0].split()[-1] == 'tv':
-		res.append(RemovePunctuation(i[0].replace('tv','television')))
+		length=len(RemovePunctuation(i[0]).split())
+		if length<=3:
+			continue
+		s=i[0].replace('tv', 'television')
+		if 'comedy' in s and 'musical' not in s:
+			res.append(s.replace('comedy','comedy or musical'))
+		elif 'musical' in s and 'comedy' not in s:
+			res.append(s.replace('musical', 'comedy or musical'))
+		else:
+			res.append(s)
+
 
 	return res

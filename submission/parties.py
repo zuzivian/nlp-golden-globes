@@ -35,13 +35,14 @@ def dictClean(plist3):
     return unique_grams
 
 def getParty(year):
-    #dir_path = os.path.dirname(os.path.realpath(""))
-    #with open(dir_path + '/Golden Globe Backup/data/gg' + str(year) + '.json') as f:
-    #    data = json.load(f)
-    #alltweets = [tweetFull['text'] for tweetFull in data]
+    dir_path = os.path.dirname(os.path.realpath(""))
+    with open(dir_path + '/Golden Globe Backup/data/gg' + str(year) + '.json') as f:
+        data = json.load(f)
+    alltweets = [tweetFull['text'] for tweetFull in data]
 
-    tweet_dict_by_award = get_classified_data(year)
-    alltweets = tweet_dict_by_award['party']
+    # Failed classifier method
+    #tweet_dict_by_award = get_classified_data(year)
+    #alltweets = tweet_dict_by_award['party']
 
     partywords = ["party", "parties"]
     partyTweets = tweetTokenContain(alltweets, partywords, stopWords)

@@ -139,8 +139,8 @@ def FilterCounter(black,C):
 	res=[]
 	for i in C.most_common(20):
 		index+=1
-		if len(i[0])==1 and len(i[0][0])<=3:
-			continue
+# 		if len(i[0])==1 and len(i[0][0])<=3:
+# 			continue
 		marker=0
 		for j in i[0]:
 			#print(j)

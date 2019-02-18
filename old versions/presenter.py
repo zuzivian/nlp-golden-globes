@@ -210,7 +210,7 @@ def nameAccuValidate(freqDict):
 
     # Case 2: Three presenters due to wrong names
     elif len(names) > 2:
-        #print(names[2] + " deleted")
+        print(names[2] + " deleted")
         return names[0:2]
     else:
         return names
@@ -241,21 +241,18 @@ def getPresenters(year):
     #all_pseudo_namelist = namesValidate(alltweets, stopWords, threshold = 50)
 
     for award in awardcat:
+        #print()
+        #print(award + ":")
         testdoc = tweet_dic[award]
-        if len(testdoc) < 1000:
-        	thv = 1 # Threshold correction if there are not much data
-        else:
-        	thv = 2
-        pseudo_namelist = namesValidate(testdoc, stopWords, threshold = thv)
+        #pseudo_namelist = all_pseudo_namelist
+        pseudo_namelist = namesValidate(testdoc, stopWords, threshold = 1)
 
         tweetSeq = tweetTextContain(testdoc, keyword)
         category_tweet = [testdoc[i] for i in tweetSeq]
         tweetInfo = subjverb_tweets(category_tweet, pseudo_namelist, keyword)
         presenter_info = nameCountValidate(tweetInfo)
         presenter = nameAccuValidate(presenter_info)
-        #print(award)
-        #print(len(testdoc))
-        #print(presenter)
+        print(presenter)
         presenter_dict[award] = presenter
 
     return presenter_dict

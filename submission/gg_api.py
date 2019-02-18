@@ -12,6 +12,8 @@ from sentiment import *
 from nominee import *
 from awardNew import *
 from joke import *
+from parties import *
+
 MAX_TWEETS = 10000000
 YEARS = [2013, 2015, 2018, 2019]
 
@@ -45,7 +47,8 @@ def get_jokes(year):
     return {}
 
 def get_parties(year):
-    return {}
+	parties = getParty(year)
+    return {parties}
 
 def get_sentiments(year):
     resdic={}
@@ -143,7 +146,7 @@ def post_ceremony():
           continue
         try:
             award_list = OFFICIAL_AWARDS_1315 if year < 2016 else OFFICIAL_AWARDS_1819
-            classified_tweets = get_and_classify_tweets('gg%d.json' % year, MAX_TWEETS, award_list, ['red carpet'])
+            classified_tweets = get_and_classify_tweets('gg%d.json' % year, MAX_TWEETS, award_list, ['red carpet', 'party'])
             with open('classified%d.json' % year, 'w') as outfile:
                 json.dump(classified_tweets, outfile)
             print('Classifying gg%d tweets... done.' % year)

@@ -14,7 +14,7 @@ def dictCount(plist):
             common_ngrams[p] += 1
         else:
             common_ngrams[p] = 1
-            
+
     return common_ngrams
 
 def dictClean(plist3):
@@ -29,14 +29,14 @@ def dictClean(plist3):
                     if phrase != phrase3:
                         score = similar(phrase, phrase3)
                         allscores.append(score)
-            if max(allscores) < 0.4: # Correct for Warner Brothers
+            if allscores and max(allscores) < 0.4: # Correct for Warner Brothers
                 unique_grams[phrase] = plist3[phrase]
 
     return unique_grams
 
 def getParty(year):
     dir_path = os.path.dirname(os.path.realpath(""))
-    with open(dir_path + '/Golden Globe Backup/data/gg' + str(year) + '.json') as f:
+    with open('gg' + str(year) + '.json') as f:
         data = json.load(f)
     alltweets = [tweetFull['text'] for tweetFull in data]
 
@@ -45,12 +45,12 @@ def getParty(year):
     #alltweets = tweet_dict_by_award['party']
 
     partywords = ["party", "parties"]
-    partyTweets = tweetTokenContain(alltweets, partywords, stopWords)
+    partyTweets = tweetTokenContain(alltweets, partywords, [])
     partydata = partyTweets[1]
 
     party2 = []
     party3 = []
-    
+
     for sentencelist in partydata:
         if "party" in sentencelist:
             pos = sentencelist.index("party")
@@ -72,10 +72,10 @@ def getParty(year):
 
     largedict = {**dictClean(p2), **dictClean(p3)}
     parties = []
-    
+
     for party in largedict.keys():
         pn = party + " " + "Party"
         parties.append(pn)
         print(pn)
-        
+
     return parties

@@ -2,7 +2,6 @@ import json
 import os
 from pprint import pprint
 
-from awards import *
 from dressed import *
 from classifier import *
 from OptimizedWin import *
@@ -47,7 +46,7 @@ def get_jokes(year):
     return {}
 
 def get_parties(year):
-	parties = getParty(year)
+    parties = getParty(year)
     return parties
 
 def get_sentiments(year):
@@ -101,7 +100,7 @@ def get_winner(year):
         with open('winner'+year+'.json')as json_data:
             winner=json.load(json_data)
         return winner
-    
+
     #if run winner first:
     else:
         dic=get_classified_data(year)
@@ -168,7 +167,7 @@ def main():
         if int(year) not in YEARS:
             print("Error: invalid year")
             continue
-        print('Valid functions: hosts awards winner nominees presenters redcarpet jokes parties sentiments')
+        print('Allowed functions: hosts award nominees winner presenters redcarpet jokes sentiments parties')
         choice = input("Select function: ")
         if choice == 'hosts':
             output = get_hosts(year)

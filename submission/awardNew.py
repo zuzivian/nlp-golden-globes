@@ -31,9 +31,7 @@ def EndAndStart(tweet,startlist,endlist):
 								result[key1]=1
 							else:
 								result[key1]+=1
-
-								
-								
+						
 
 def getawards(year):
 	j_file=open('gg%s.json' % year)

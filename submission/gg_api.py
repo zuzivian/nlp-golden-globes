@@ -48,7 +48,7 @@ def get_jokes(year):
 
 def get_parties(year):
 	parties = getParty(year)
-    return {parties}
+    return parties
 
 def get_sentiments(year):
     resdic={}

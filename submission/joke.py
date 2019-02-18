@@ -51,6 +51,7 @@ def GetJoker(file):
 		for j in jokeword:
 			if j in i['text'].lower():
 				extract_names(i['text'],namesdic)
+				break
 	temp = sorted(namesdic.items(), key=lambda x: x[1], reverse=True)
 	for i in temp[0:20]:
 		if 'golden' in i[0].lower():

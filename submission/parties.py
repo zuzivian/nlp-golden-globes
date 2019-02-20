@@ -43,9 +43,12 @@ def getParty(year):
     # Failed classifier method
     #tweet_dict_by_award = get_classified_data(year)
     #alltweets = tweet_dict_by_award['party']
+    stopWords = set(stopwords.words('english'))
+    twitterwords = {"http", "rt", "goldenglobes", "golden", "globes", "golden", "globes", "globe"}
+    stopWords = stopWords.union(twitterwords)
 
     partywords = ["party", "parties"]
-    partyTweets = tweetTokenContain(alltweets, partywords, [])
+    partyTweets = tweetTokenContain(alltweets, partywords, stopWords)
     partydata = partyTweets[1]
 
     party2 = []
